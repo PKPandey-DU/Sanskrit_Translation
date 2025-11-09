@@ -1,0 +1,6 @@
+﻿torch
+transformers
+pandas
+numpy
+sacrebleu
+streamlit
