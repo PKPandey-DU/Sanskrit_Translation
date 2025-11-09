@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+# Better diffs for notebooks
+*.ipynb linguist-language=Jupyter+Notebook
+
+# Keep CRLF for Windows-specific scripts if needed
+*.bat eol=crlf
+*.ps1 eol=crlf
