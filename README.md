@@ -1,2 +1,2 @@
 # Sanskrit_Translation
-Design and Development of a Sanskrit Language Translation and Analysis Tool using NLP Techniques
+Project sem 7 & 8
