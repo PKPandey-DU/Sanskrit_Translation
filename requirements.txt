@@ -4,3 +4,5 @@ pandas
 numpy
 sacrebleu
 streamlit
+indic-nlp-library
+gradio
