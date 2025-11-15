@@ -1,36 +1,20 @@
-\## Stack
+# Sanskrit Translation Project
 
-\- \*\*Colab + Google Drive\*\* (model/data cache)
+## Overview
+This project explores rule-based and machine-learning-based methods
+for translating Sanskrit text to English, and exposes the models
+through a Streamlit web application.
 
-\- \*\*GitHub\*\* (source of truth)
+## Repository Structure
+- `data/` – corpora and intermediate processed files  
+- `notebooks/` – Colab-friendly experiment notebooks  
+- `src/sanskrit_translation/` – reusable Python package  
+- `models/` – saved models and tokenizers  
+- `app/` – Streamlit application  
 
-\- Transformers, PyTorch, IndicNLP, SacreBLEU
-
-\- (Optional) Gradio UI in Colab; Streamlit app for deployment
-
-
-
-\## Project Layout
-
-\- `src/` core Python code
-
-\- `notebooks/` experiments \& evaluation
-
-\- `app/` optional Streamlit UI
-
-\- `data/` small samples (large corpora kept in Drive)
-
-
-
-\## Quick Start (Colab)
-
-1\. Open this repo in Colab: \*Colab → File → Open notebook → GitHub\*.
-
-2\. Run setup cell:
-
-&nbsp;  ```python
-
-&nbsp;  !pip -q install "transformers>=4.39,<5" "torch>=2.3,<2.6" indic-nlp-library sacrebleu pandas numpy gradio
-
-&nbsp;  from google.colab import drive; drive.mount
-
+## Setup (Colab)
+1. Mount Google Drive.
+2. `cd` into the project folder.
+3. Install the package:
+   ```bash
+   !pip install -e .
