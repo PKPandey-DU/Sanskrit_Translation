@@ -1,24 +1,23 @@
-import streamlit as st
+import os
+import sys
 
+# --- Make sure Python can see the project root and `src` package ---
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
+import streamlit as st
 from src.sanskrit_translation.preprocessing import tokenize_sentence, transliterate_to_roman
 from src.sanskrit_translation.rule_based import translate_tokens
-from src.sanskrit_translation.transformer_model import load_transformer_model, translate_with_transformer
 
-@st.cache_resource
-def load_models():
-    try:
-        tokenizer, transformer = load_transformer_model()
-    except Exception as e:
-        tokenizer, transformer = None, None
-    return tokenizer, transformer
 
 def main():
-    st.title("Sanskrit → English Translation Demo")
+    st.title("Sanskrit → English Translation Demo (Rule-based Prototype)")
 
     st.sidebar.header("Options")
-    model_choice = st.sidebar.selectbox(
-        "Choose translation model",
-        ["Rule-based (simple)", "Transformer (fine-tuned)"],
+    st.sidebar.markdown(
+        "Currently using **rule-based translation only**.\n\n"
+        "Transformer / neural models will be added after PyTorch is configured."
     )
 
     text = st.text_area("Enter Sanskrit text (Devanagari):", height=150)
@@ -26,27 +25,18 @@ def main():
     if st.button("Translate") and text.strip():
         st.subheader("Preprocessing")
         tokens = tokenize_sentence(text)
-        st.write("Tokens:", tokens)
-        st.write("Roman transliteration:", transliterate_to_roman(text))
+        st.write("**Tokens:**", tokens)
+        st.write("**Roman transliteration:**", transliterate_to_roman(text))
 
-        st.subheader("Translation")
-
-        if model_choice == "Rule-based (simple)":
-            translation = translate_tokens(tokens)
-            st.write("**Rule-based translation:**")
-            st.write(translation)
-
-        elif model_choice == "Transformer (fine-tuned)":
-            tokenizer, transformer = load_models()
-            if tokenizer is None:
-                st.error("Transformer model not available. Train and save it first.")
-            else:
-                translation = translate_with_transformer(text, tokenizer, transformer)
-                st.write("**Transformer translation:**")
-                st.write(translation)
+        st.subheader("Translation (Rule-based)")
+        translation = translate_tokens(tokens)
+        st.write(translation)
 
     st.markdown("---")
-    st.markdown("This is a research/teaching demo; translations may be approximate.")
+    st.markdown(
+        "This is a research/teaching demo; translations are approximate and rules are incomplete."
+    )
+
 
 if __name__ == "__main__":
     main()
